@@ -17,9 +17,10 @@ h1 a {
 
 .content {
     margin-left: 40px;
+    overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4 {
+.post h1, .post h2, .post h3, .post h4 {
     font-family: 'Lobster', cursive;
 }
 
@@ -53,4 +54,9 @@ h1, h2, h3, h4 {
 
 .comment {
     margin: 20px 0px 20px 20px;
+}
+
+.profile_pic {
+    
+    background-size: cover;
 }

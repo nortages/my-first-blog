@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-8 posts">
+            {% for post in posts %}
+                <div class="post">
+                    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                    <div class="date">
+                        {{ post.created_date }}
+                        <a href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+                </div>
+                {% empty %}
+                    <p style="margin: auto;">No posts here yet :(</p>
+            {% endfor %}
+        </div>
+        <div class="col-4">
+            <img class="profile_pic" src="{{ profile.profile_pic.url }}" height='250' width='250'>
+            <h1>{{ profile.user.username }}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
