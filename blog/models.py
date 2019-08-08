@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 def path_and_rename(instance, filename):
     upload_to = 'profile_pics'
     ext = filename.split('.')[-1]
-    filename = f'{ instance.user.username }.{ext}'
+    filename = '{}.{}'.format(instance.user.username, ext)
     return os.path.join(upload_to, filename)
 
 class Post(models.Model):
