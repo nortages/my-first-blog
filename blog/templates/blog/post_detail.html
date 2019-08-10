@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="post">
+    <div class="post px-3 py-1">
         <div class="date">
             {{ post.created_date }}
             <a href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
@@ -21,15 +21,17 @@
             <a class="btn btn-primary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
         {% endif %}
         {% for comment in comments %}
-            <div class="comment">
-                <div class="date">
+            <div class="comment px-3 py-1 my-4">
+                <p class="date">
                     {{ comment.created_date }}
                     {% if user.is_superuser or comment.author == user %}
-                        <a class="btn" href="{% url 'comment_remove' pk=comment.pk %}"><i class="fas fa-trash"></i></a>
+                        <a class="" href="{% url 'comment_remove' pk=comment.pk %}"><i class="fas fa-trash"></i></a>
                     {% endif %}
-                </div>
+                </p>
                 <strong><a href="{% url 'profile' username=comment.author.username %}">{{ comment.author.username }}</a></strong>
-                <p>{{ comment.text|linebreaks }}</p>
+                <div class="mb-0">
+                    <p>{{ comment.text|linebreaks }}</p>
+                </div>
             </div>
             {% empty %}
                 <p>No comments here yet :(</p>

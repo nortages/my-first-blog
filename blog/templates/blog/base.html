@@ -24,25 +24,25 @@
 <body>
     <div class="container-fluid">
     	<div class="row page-header">
-            <div class="main-title">
+            <div class="col-sm-12 col-md-6 main-title text-center">
                 <h1><a href="/">Nortages' blog</a></h1>
             </div>
-            <div class="options">
+            <div class="col-sm-12 col-md-6 options text-center mt-sm-n4 mt-md-0">
                 {% if user.is_authenticated %}
-                    <p class="top-menu"><a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
-                    <a href="{% url 'post_new' %}" class="top-menu"><i class="fas fa-pen-square"></i></span></a>
-                    <a class="top-menu" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></p>
+                    <div class=" top-menu"><a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
+                    <a class="top-menu" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+                    <a class="top-menu" href="{% url 'post_new' %}"><i class="fas fa-pen-square"></i></span></a></div>
                 {% else %}
-                    <p class="top-menu">Hello, new user. Please log in.
-                    <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
+                    <div class="col top-menu hidden-sm">
                     <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-                    </p>
+                    <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
+                    </div>
                 {% endif %}
             </div>
         </div>
     
         <div class="row content no-gutters justify-content-center">
-            <div class="col-sm-12 col-md-10">
+            <div class="col-md-10">
                 {% block content %}
                 {% endblock %}
             </div>
