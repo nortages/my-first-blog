@@ -11,7 +11,6 @@ p {
 }
 
 .page-header {
-    height: 20%;
     background-color: #000;
     display: flex;
     justify-content: space-between;
@@ -48,7 +47,6 @@ p {
 }
 
 .content {
-    height: 80%;
     /*flex: 1 1 auto;*/
     /*margin-left: 5em;*/
     /*margin-right: 5em;*/

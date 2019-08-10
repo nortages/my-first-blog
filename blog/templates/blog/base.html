@@ -23,11 +23,11 @@
 </head>
 <body>
     <div class="container-fluid">
-    	<div class="row page-header">
-            <div class="col-sm-12 col-md-6 main-title text-center">
+    	<div class="row page-header p-2">
+            <div class="col-lg-6 main-title text-center">
                 <h1><a href="/">Nortages' blog</a></h1>
             </div>
-            <div class="col-sm-12 col-md-6 options text-center mt-sm-n4 mt-md-0">
+            <div class="col-lg-6 options text-center mt-n2 mt-lg-0">
                 {% if user.is_authenticated %}
                     <div class="top-menu">
                         <a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
@@ -45,7 +45,7 @@
         </div>
     
         <div class="row content no-gutters justify-content-center">
-            <div class="col-md-10">
+            <div class="col-lg-10">
                 {% block content %}
                 {% endblock %}
             </div>
