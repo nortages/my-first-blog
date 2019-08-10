@@ -29,13 +29,16 @@
             </div>
             <div class="col-sm-12 col-md-6 options text-center mt-sm-n4 mt-md-0">
                 {% if user.is_authenticated %}
-                    <div class=" top-menu"><a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
-                    <a class="top-menu" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
-                    <a class="top-menu" href="{% url 'post_new' %}"><i class="fas fa-pen-square"></i></span></a></div>
+                    <div class="top-menu">
+                        <a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
+                        <a class="" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+                        <a class="" href="{% url 'post_new' %}"><i class="fas fa-pen-square"></i></span></a>
+                    </div>
                 {% else %}
-                    <div class="col top-menu hidden-sm">
-                    <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-                    <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
+                    <div class="top-menu">
+                        <p>Please login
+                        <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
+                        <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a></p>
                     </div>
                 {% endif %}
             </div>
