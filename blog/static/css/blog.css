@@ -2,8 +2,6 @@ html, body, .container-fluid {
     height: 100%;
     padding: 0;
     background-color: #aaa;
-    /*display: flex;*/
-    /*flex-flow: column;*/
 }
 
 p {
@@ -16,15 +14,14 @@ p {
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    /*flex: 0 1 auto;*/
-    /*padding: 20px 20px 20px 40px;*/
 }
 
 .page-header h1 {
     font-size: 3em;
 }
 
-.options {   
+.options {
+
 }
 
 .page-header a, .page-header a:visited, .page-header a:active {
@@ -47,11 +44,8 @@ p {
 }
 
 .content {
-    /*flex: 1 1 auto;*/
-    /*margin-left: 5em;*/
-    /*margin-right: 5em;*/
-}
 
+}
 
 .date {
     color: #828282;
@@ -70,8 +64,6 @@ p {
 }
 
 .post {
-    /*padding: 1em;*/
-    /*margin-bottom: 1em;*/
     overflow-wrap: break-word;
     background-color: #fff;
 }
