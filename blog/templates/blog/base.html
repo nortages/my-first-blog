@@ -3,31 +3,50 @@
 <html>
 <head>
 	<title>Nortages' blog</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <link rel= "preconnect" href="https://fonts.googleapis.com" />
+    <link rel= "preconnect" href="https://kit.fontawesome.com" />
+    <link rel= "preconnect" href="//maxcdn.bootstrapcdn.com" />
+
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" as="style" />
+    <link rel="preload" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" as="style"/>
+    <link rel="preload" href="https://kit.fontawesome.com/75fcda7a4c.js" as="script"/>
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
+
     <script src="https://kit.fontawesome.com/75fcda7a4c.js"></script>
 </head>
 <body>
-	<div class="page-header">
-        {% if user.is_authenticated %}
-            <a href="{% url 'post_new' %}" class="top-menu"><i class="fas fa-pen-square"></i></span></a>
-            <a class="top-menu" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
-            <p class="top-menu">Hello, <a href="{% url 'profile' username=user.username %}">{{ user.username }}</a> </p>
-        {% else %}
-
-            <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
-            <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-            <p class="top-menu">Hello, new user. Please log in. </p>
-        {% endif %}
-        <h1><a href="/">Nortages' blog</a></h1>
-    </div>
+    <div class="container-fluid">
+    	<div class="row page-header">
+            <div class="main-title">
+                <h1><a href="/">Nortages' blog</a></h1>
+            </div>
+            <div class="options">
+                {% if user.is_authenticated %}
+                    <p class="top-menu"><a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
+                    <a href="{% url 'post_new' %}" class="top-menu"><i class="fas fa-pen-square"></i></span></a>
+                    <a class="top-menu" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></p>
+                {% else %}
+                    <p class="top-menu">Hello, new user. Please log in.
+                    <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
+                    <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
     
-    <div class="content container">
-        {% block content %}
-        {% endblock %}
+        <div class="row content no-gutters justify-content-center">
+            <div class="col-sm-12 col-md-10">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -12,11 +12,13 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('post/<int:pk>/remove/', views.post_remove, name='post_remove'),
     path('post/<int:pk>/add_comment/', views.add_comment_to_post, name='add_comment_to_post'),
-    path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
     path('accounts/register/', views.register, name='register'),
+    path('accounts/register/?next', views.register, name='register'),
     path('profile/<str:username>/', views.profile, name='profile'),
     path('profile/', views.profile, name='profile'),
+    path('profile/edit/<str:username>', views.profile_edit, name='profile_edit'),
+    path('profile/edit/', views.profile_edit, name='profile_edit'),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()

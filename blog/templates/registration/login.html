@@ -15,7 +15,11 @@
     {% endif %}
 {% endif %}
 
+{% if next %}
+<form method="post" action="{% url 'login' %}?next={{next}}">
+{% else %}
 <form method="post" action="{% url 'login' %}">
+{% endif %}
 {% csrf_token %}
 <table>
 <tr>

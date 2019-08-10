@@ -133,3 +133,23 @@ def profile(request, username=None):
     profile = get_object_or_404(User, username=username).profile
     posts = profile.user.posts.order_by('-created_date')
     return render(request, 'blog/profile.html', {'profile': profile, 'posts': posts})
+
+@login_required
+def profile_edit(request, username=None):
+    if username == None:
+        username = request.user.username
+    user = get_object_or_404(User, username=username)
+    profile = user.profile
+    if request.user != user:
+        raise PermissionDenied
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('profile', username=request.POST['username'])
+    else:
+        user_form = UserForm(instance=user)
+        profile_form = ProfileForm(instance=profile)
+    return render(request, 'blog/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})

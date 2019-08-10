@@ -12,6 +12,7 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    text = forms.CharField(widget=forms.Textarea(attrs={'autofocus':'off'}))
     class Meta:
         model = Comment
         fields = ('text',)
