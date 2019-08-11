@@ -2,9 +2,15 @@ html, body, .container-fluid {
     height: 100%;
     padding: 0;
     background-color: #aaa;
+    font-family: 'Open Sans', sans-serif;
 }
 
 p {
+    margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Baloo', cursive;
     margin-bottom: 0;
 }
 
@@ -17,11 +23,12 @@ p {
 }
 
 .page-header h1 {
+    margin-bottom: 0;
     font-size: 3em;
 }
 
-.options {
-
+.post_options > a {
+    color: #000;
 }
 
 .page-header a, .page-header a:visited, .page-header a:active {
@@ -60,7 +67,7 @@ p {
 }
 
 .post h1, .post h2, .post h3, .post h4 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Baloo', cursive;
 }
 
 .post {
@@ -78,6 +85,16 @@ p {
 
 .comment {
     background-color: #fff;
+    overflow-wrap: break-word;
+}
+
+.comment .comment_header > a {
+    color: #000;
+}
+
+.comment_header {
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile_block {
@@ -91,6 +108,6 @@ p {
 .profile_info {
     display: flex;
     flex-direction: column;
-    margin-left: 2em;
-}
+    overflow-wrap: break-word;
 
+}

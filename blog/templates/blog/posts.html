@@ -1,12 +1,13 @@
 <div class="posts mt-md-5">
     {% for post in posts %}
-        <div class="post mb-md-4 p-3">
+        <div class="post mb-md-4 p-3 rounded border-top">
             <h1 class="title ellipses"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <div class="date">
                 {{ post.created_date }}
                 <a href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
             </div>
             <a href="{% url 'post_detail' pk=post.pk %}#comments">Comments: {{ post.comments.count }}</a>
+            <!-- <span class="border-bottom"></span> -->
         </div>
     {% endfor %}
 </div>

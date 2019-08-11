@@ -14,12 +14,8 @@
     <p>Please login to see this page.</p>
     {% endif %}
 {% endif %}
-
-{% if next %}
-<form method="post" action="{% url 'login' %}?next={{next}}">
-{% else %}
+<!-- 
 <form method="post" action="{% url 'login' %}">
-{% endif %}
 {% csrf_token %}
 <table>
 <tr>
@@ -35,5 +31,19 @@
 <input type="submit" value="login">
 <input type="hidden" name="next" value="{{ next }}">
 </form>
+ -->
 
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+    </div>
+    <div class="form-group">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {% endblock %}

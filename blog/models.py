@@ -31,7 +31,7 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='comments')
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     text = models.TextField()
-    reply_to = models.ForeignKey('blog.Comment', on_delete=models.SET_NULL, default=None, null=True)
+    reply_to = models.ForeignKey('blog.Comment', on_delete=models.SET_NULL, null=True, default=None)
     created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
