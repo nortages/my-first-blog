@@ -1,9 +1,18 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+<div class="forms">
     <h1>New post</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-primary"><i class="fas fa-save"></i>Save</button>
+    <form method="POST">{% csrf_token %}
+    	<div>
+    	    {{ form.title.label_tag }}
+	        {{ form.title }}
+    	</div>
+        <div>
+    	    {{ form.text.label_tag }}
+	        {{ form.text }}
+        </div>
+        <button type="submit" class="save btn btn-dark"><i class="fas fa-save"></i>Save</button>
     </form>
+</div>
 {% endblock %}

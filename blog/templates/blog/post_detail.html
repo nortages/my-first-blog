@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="post p-3 rounded-bottom">
+    <div class="post p-3 rounded-bottom bg-white shadow">
         <div class="date">
             {{ post.created_date }}
             <a class="ml-1" href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
@@ -20,8 +20,8 @@
 
     <div id="comments">
         {% for comment in comments %}
-            <div class="comment p-3 my-md-4 rounded border-top">
-                <div class="comment_header">
+            <div class="comment bg-white p-3 my-lg-4 rounded border-top">
+                <div class="comment_header d-flex justify-content-between">
                     <div class="comment_info">
                         <p class="date">{{ comment.created_date }}</p>
                         <strong><a href="{% url 'profile' username=comment.author.username %}">{{ comment.author.username }}</a></strong>
@@ -33,11 +33,7 @@
                 <div>
                     {{ comment.text|linebreaks }}
                 </div>
-
-                <!-- </div> -->
             </div>
-            {% empty %}
-                <p>No comments here yet :(</p>
         {% endfor %}
     </div>
 {% endblock %}

@@ -2,18 +2,6 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
 <!-- 
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
@@ -32,18 +20,32 @@
 <input type="hidden" name="next" value="{{ next }}">
 </form>
  -->
+<div class="forms">
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <div class="form-group">
-        {{ form.username.label_tag }}
-        {{ form.username }}
-    </div>
-    <div class="form-group">
-        {{ form.password.label_tag }}
-        {{ form.password }}
-    </div>
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 {% endblock %}

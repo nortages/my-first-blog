@@ -1,11 +1,13 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-	<div class="add_comment">
-	    <h1>New comment</h1>
-	    <form method="POST" class="post-form">{% csrf_token %}
-	        {{ form.as_p }}
-	        <button type="submit" class="save btn btn-default">Send</button>
-	    </form>
-	</div>
+<div class="forms">
+    <h1>New comment</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-primary"><i class="fas fa-plus"></i>Add</button>
+        {# <img src="{% static 'icons/plus-solid.svg' %}"> #}
+        {# <img src="static/icons/plus-solid.svg"> #}
+    </form>
+</div>
 {% endblock %}

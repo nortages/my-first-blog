@@ -6,7 +6,7 @@ from .models import Post, Comment, Profile
 
 
 class PostForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'autofocus':'off', 'class':'rounded'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'rounded'}))
     text = forms.CharField(widget=forms.Textarea(attrs={'autofocus':'on', 'class':'rounded'}))
     class Meta:
         model = Post

@@ -1,8 +1,8 @@
 html, body, .container-fluid {
     height: 100%;
     padding: 0;
-    background-color: #aaa;
     font-family: 'Open Sans', sans-serif;
+    color: #000;
 }
 
 p {
@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .top-menu a:hover {
-    color: #aaa;
+    color: #868e96;
 }
 
 .ellipses {
@@ -50,8 +50,8 @@ h1, h2, h3, h4, h5 {
   text-overflow: ellipsis;
 }
 
-.content {
-
+button > i {
+    margin-right: 0.5em;
 }
 
 .date {
@@ -62,21 +62,20 @@ h1, h2, h3, h4, h5 {
     float: right;
 }
 
-.posts {
-    padding: 0;
-}
-
 .post h1, .post h2, .post h3, .post h4 {
     font-family: 'Baloo', cursive;
 }
 
 .post {
     overflow-wrap: break-word;
-    background-color: #fff;
 }
 
-.post-form textarea, .post-form input {
+.forms textarea, .forms input {
     width: 100%;
+}
+
+.forms div {
+    margin-top: 0.6em;
 }
 
 .post h1 a, .post h1 a:visited {
@@ -84,7 +83,6 @@ h1, h2, h3, h4, h5 {
 }
 
 .comment {
-    background-color: #fff;
     overflow-wrap: break-word;
 }
 
@@ -92,22 +90,14 @@ h1, h2, h3, h4, h5 {
     color: #000;
 }
 
-.comment_header {
-    display: flex;
-    justify-content: space-between;
-}
-
 .profile_block {
     overflow-wrap: break-word;
-    background-color: #fff;
-
-    display: flex;
-    justify-content: flex-start;
 }
 
 .profile_info {
-    display: flex;
-    flex-direction: column;
     overflow-wrap: break-word;
+}
 
+.forms {
+    margin-top: 1.5em;
 }

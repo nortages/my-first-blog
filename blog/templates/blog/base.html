@@ -6,25 +6,25 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
 
     <link rel= "preconnect" href="https://fonts.googleapis.com" />
     <link rel= "preconnect" href="https://kit.fontawesome.com" />
     <link rel= "preconnect" href="//maxcdn.bootstrapcdn.com" />
 
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Baloo&subset=latin,cyrillic" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Baloo|Open+Sans&display=swap" as="style" />
     <link rel="preload" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" as="style"/>
     <link rel="preload" href="https://kit.fontawesome.com/75fcda7a4c.js" as="script"/>
 
-	<link href="https://fonts.googleapis.com/css?family=Baloo&subset=latin,cyrillic" rel="stylesheet" type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Baloo|Open+Sans&display=swap" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
 
     <script src="https://kit.fontawesome.com/75fcda7a4c.js"></script>
 </head>
-<body>
+<body class="bg-secondary">
     <div class="container-fluid">
-    	<div class="row no-gutters page-header p-2">
+    	<div class="row no-gutters page-header p-2 sticky-top">
             <div class="col-lg-6 main-title text-center">
                 <h1><a href="/">Nortages' blog</a></h1>
             </div>
@@ -38,8 +38,13 @@
                 {% else %}
                     <div class="top-menu">
                         <p>Please login
-                        <a href="{% url 'login' %}?next={{request.path}}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-                        <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a></p>
+                            {% if request.path == "/" %}
+                                <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
+                            {% else %}
+                                <a href="{% url 'login' %}?next={{request.path}}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
+                            {% endif %}
+                            <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
+                        </p>
                     </div>
                 {% endif %}
             </div>
