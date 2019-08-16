@@ -2,27 +2,25 @@
 
 {% block content %}
     <div class="post p-3 rounded-bottom bg-white shadow">
-        <div class="date">
-            {{ post.created_date }}
-            <a class="ml-1" href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
+        <span class="date float-left">{{ post.created_date }}</span>
+        <div class=" d-flex flex-row">
+            <a class="ml-2 ellipses" href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
             {% if user.is_superuser or post.author == user %}
-                <span class="post_options">
-                    <a class="ml-2" href="{% url 'post_edit' pk=post.pk %}"><i class="fas fa-edit"></i></a>
-                    <a class="ml-1" href="{% url 'post_remove' pk=post.pk %}"><i class="fas fa-trash"></i></a>
-                </span>
+                <a class="ml-2 post_options" href="{% url 'post_edit' pk=post.pk %}"><i class="fas fa-edit"></i></a>
+                <a class="ml-2 post_options" href="{% url 'post_remove' pk=post.pk %}"><i class="fas fa-trash"></i></a>
             {% endif %}
         </div>
         
-        <h1 id='title' class="mt-2">{{ post.title }}</h1>
+        <h1 class='title mt-2'>{{ post.title }}</h1>
         <p id="text">{{ post.text|linebreaksbr }}</p>
         <a class="btn btn-primary mt-3" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
     </div>
 
     <div id="comments">
         {% for comment in comments %}
-            <div class="comment bg-white p-3 my-lg-4 rounded border-top">
+            <div class="comment bg-white p-3 my-lg-4 rounded border-top shadow">
                 <div class="comment_header d-flex justify-content-between">
-                    <div class="comment_info">
+                    <div class="comment_info ellipses">
                         <p class="date">{{ comment.created_date }}</p>
                         <strong><a href="{% url 'profile' username=comment.author.username %}">{{ comment.author.username }}</a></strong>
                     </div>
@@ -30,7 +28,7 @@
                         <a class="" href="{% url 'comment_remove' pk=comment.pk %}"><i class="fas fa-trash"></i></a>
                     {% endif %}
                 </div>
-                <div>
+                <div class="mt-1">
                     {{ comment.text|linebreaks }}
                 </div>
             </div>

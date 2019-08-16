@@ -1,3 +1,4 @@
+
 html, body, .container-fluid {
     height: 100%;
     padding: 0;
@@ -9,12 +10,13 @@ p {
     margin-bottom: 0;
 }
 
-h1, h2, h3, h4, h5 {
+.title {
+    font-size: 2.5rem;
     font-family: 'Baloo', cursive;
     margin-bottom: 0;
 }
 
-.page-header {
+header {
     background-color: #000;
     display: flex;
     justify-content: space-between;
@@ -22,22 +24,17 @@ h1, h2, h3, h4, h5 {
     color: #fff;
 }
 
-.page-header h1 {
-    margin-bottom: 0;
-    font-size: 3em;
+header .title {
+    font-size: 3rem;
 }
 
-.post_options > a {
-    color: #000;
-}
-
-.page-header a, .page-header a:visited, .page-header a:active {
+header a, header a:visited, header a:active, header a:hover {
     color: #fff;
     text-decoration: none;
 }
 
-.top-menu, .top-menu:hover, .top-menu:visited {
-    font-size: 26pt;
+.top-menu {
+    font-size: 2rem;
 }
 
 .top-menu a:hover {
@@ -51,31 +48,24 @@ h1, h2, h3, h4, h5 {
 }
 
 button > i {
-    margin-right: 0.5em;
+    margin-right: 0.5rem;
 }
 
 .date {
     color: #828282;
+    /*overflow-wrap: */
 }
 
 .save {
     float: right;
 }
 
-.post h1, .post h2, .post h3, .post h4 {
-    font-family: 'Baloo', cursive;
+.post #text, .post .title{
+    overflow-wrap: break-word;    
 }
 
-.post {
-    overflow-wrap: break-word;
-}
-
-.forms textarea, .forms input {
-    width: 100%;
-}
-
-.forms div {
-    margin-top: 0.6em;
+.post_options {
+    color: #000;
 }
 
 .post h1 a, .post h1 a:visited {
@@ -90,14 +80,58 @@ button > i {
     color: #000;
 }
 
+.comment .comment_header > a:hover {
+    color: red;
+}
+
 .profile_block {
-    overflow-wrap: break-word;
+    /*overflow-wrap: break-word;*/
 }
 
-.profile_info {
-    overflow-wrap: break-word;
+.profile_info .title {
+    font-size: 2.2rem;
+    /*overflow-wrap: break-word;*/
 }
 
-.forms {
-    margin-top: 1.5em;
+.top-menu > * {
+    margin-right: 1rem;
 }
+
+.label {
+  cursor: pointer;
+}
+
+.img-container img {
+  max-width: 100%;
+}
+
+.errors {
+    color: red;
+    margin-bottom: 0;
+}
+
+.form-control {
+    height: auto;
+}
+
+
+/*.form-group {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 80%;
+  transform: translate3d(0, -110%, 0);
+  opacity: 1;
+}
+*/

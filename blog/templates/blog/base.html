@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,47 +10,49 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
 
     <link rel= "preconnect" href="https://fonts.googleapis.com" />
-    <link rel= "preconnect" href="https://kit.fontawesome.com" />
     <link rel= "preconnect" href="//maxcdn.bootstrapcdn.com" />
 
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Baloo|Open+Sans&display=swap" as="style" />
     <link rel="preload" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" as="style"/>
-    <link rel="preload" href="https://kit.fontawesome.com/75fcda7a4c.js" as="script"/>
 
 	<link href="https://fonts.googleapis.com/css?family=Baloo|Open+Sans&display=swap" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/floating-labels.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
 
-    <script src="https://kit.fontawesome.com/75fcda7a4c.js"></script>
+
+    <link  href="{% static 'node_modules/cropperjs/dist/cropper.css' %}" rel="stylesheet">
+    <script src="{% static 'node_modules/cropperjs/dist/cropper.js' %}"></script>
+
+    <link href="{% static 'fontawesome-free-5.10.1-web/css/all.css' %}" rel="stylesheet">
+
+
 </head>
 <body class="bg-secondary">
     <div class="container-fluid">
-    	<div class="row no-gutters page-header p-2 sticky-top">
-            <div class="col-lg-6 main-title text-center">
-                <h1><a href="/">Nortages' blog</a></h1>
+    	<header class="row no-gutters p-2 sticky-top">
+            <div class="col-lg-6 text-center">
+                <h1 class="title"><a href="/">Nortages' blog</a></h1>
             </div>
-            <div class="col-lg-6 header_options text-center mt-n2 mt-lg-0">
+            <div class="col-lg-6 top-menu text-center mt-n2 mt-lg-0 d-flex justify-content-center">
                 {% if user.is_authenticated %}
-                    <div class="top-menu">
+                    <div class="ellipses">
                         <a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
-                        <a class="" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
-                        <a class="" href="{% url 'post_new' %}"><i class="fas fa-pen-square"></i></span></a>
                     </div>
+                    <a class="" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+                    <a class="" href="{% url 'post_new' %}"><i class="fas fa-pen-square"></i></a>
                 {% else %}
-                    <div class="top-menu">
-                        <p>Please login
-                            {% if request.path == "/" %}
-                                <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-                            {% else %}
-                                <a href="{% url 'login' %}?next={{request.path}}" class="top-menu"><i class="fas fa-sign-in-alt"></i></a>
-                            {% endif %}
-                            <a href="{% url 'register' %}" class="top-menu"><i class="fas fa-user-plus"></i></a>
-                        </p>
-                    </div>
+                    <span>Please login</span>
+                    {% if request.path == "/" or request.path == "/accounts/register/" or request.path == "/accounts/login/" %}
+                        <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
+                    {% else %}
+                        <a href="{% url 'login' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i></a>
+                    {% endif %}
+                    <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i></a>
                 {% endif %}
             </div>
-        </div>
-    
+        </header>
+        
         <div class="row content no-gutters justify-content-center">
             <div class="col-lg-10">
                 {% block content %}

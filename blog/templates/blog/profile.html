@@ -1,13 +1,17 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="profile_block bg-white p-3 rounded-bottom d-flex flex-row shadow">
-        <img class="profile_pic" src="{{ profile.profile_pic.url }}" height='150' width='150'>
-        <div class="profile_info ml-3">
-            <h2>{{ profile.user.username }}
-            {% if user.is_superuser or post.author == user %}
-                <a class="btn" href="{% url 'profile_edit' username=profile.user.username %}"><i class="fas fa-edit"></i></a>
-            {% endif %}</h1>
+    <div class="row no-gutters profile_block bg-white p-3 rounded-bottom shadow">
+        <div class="col-3">
+            <img class="avatar rounded img-fluid w-100" src="{{ profile.avatar.url }}">
+        </div>
+        <div class="col-9 profile_info pl-3">
+            <div class="d-flex flex-row">
+                <h1 class="title ellipses">{{ profile.user.username }}</h1>
+                {% if user.is_superuser or profile.user == user %}
+                    <!-- <a class="ml-2" href="{% url 'profile_edit' username=profile.user.username %}"><i class="fas fa-edit"></i></a> -->
+                {% endif %}
+            </div>
             <p>Posts: {{ posts.count }}</p>
             <p>Comments: {{ profile.user.comments.count }}</p>
         </div>

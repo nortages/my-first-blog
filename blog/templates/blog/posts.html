@@ -1,13 +1,24 @@
+{% load custom_filters %}
+
 <div class="posts mt-lg-5">
     {% for post in posts %}
         <div class="post bg-white mb-lg-4 p-3 rounded border-top shadow">
-            <h1 class="title ellipses"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <div class="date">
-                {{ post.created_date }}
-                <a href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
+            <h1 class="title ellipses">
+                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+            </h1>
+            <div class="date ellipses">
+                {% if post.created_date|is_thisYear %}
+                    {% if post.created_date|is_today %}
+                        {{ post.created_date|date:"h:iA" }}
+                    {% else %}
+                        {{ post.created_date|date:"M j" }}
+                    {% endif %}
+                {% else %}
+                    {{ post.created_date|date:"M j, Y" }}
+                {% endif %}
+                <a class="ml-1" href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
             </div>
             <a href="{% url 'post_detail' pk=post.pk %}#comments">Comments: {{ post.comments.count }}</a>
-            <!-- <span class="border-bottom"></span> -->
         </div>
     {% endfor %}
 </div>

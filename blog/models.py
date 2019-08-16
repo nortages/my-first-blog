@@ -1,4 +1,5 @@
 import os
+from datetime import datetime as dt
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -6,16 +7,10 @@ from django.contrib.auth.models import User
 
 
 def path_and_rename(instance, filename):
-    upload_to = 'profile_pics'
+    upload_to = 'avatar'
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(instance.user.username, ext)
     return os.path.join(upload_to, filename)
-
-# @receiver(post_delete, sender=Post)
-# def photo_post_delete_handler(sender, **kwargs):
-#     listingImage = kwargs['instance']
-#     storage, path = listingImage.image.storage, listingImage.image.path
-#     storage.delete(path)
 
 
 class Post(models.Model):
@@ -38,9 +33,9 @@ class Comment(models.Model):
         return self.text
 
 class Profile(models.Model):
-    email =  models.EmailField(unique=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    profile_pic = models.ImageField(default='profile_pics/default.png', upload_to=path_and_rename, blank=True)
+    email =  models.EmailField(unique=True, null=True)
+    avatar = models.ImageField(default='avatars/default.png', upload_to='avatars/', blank=True)
 
     def __str__(self):
         return self.user.username

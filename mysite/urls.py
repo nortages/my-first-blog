@@ -23,8 +23,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
-    # url(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico'), permanent=True),
+    path('accounts/logout/', views.LogoutView.as_view(next_page='login'), name='logout'),
     path('', include('blog.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

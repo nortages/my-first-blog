@@ -1,13 +1,17 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div class="forms">
-    <h1>New comment</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-primary"><i class="fas fa-plus"></i>Add</button>
-        {# <img src="{% static 'icons/plus-solid.svg' %}"> #}
-        {# <img src="static/icons/plus-solid.svg"> #}
-    </form>
+<div class="row no-gutters">
+<form class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" method="post">
+    {% csrf_token %}
+    <h2 class="mb-2">Add comment</h2>
+
+    <div class="form-label-group">
+        {{ form.text }}
+        <label for="inputComment">Comment text</label>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Add</button>
+</form>
 </div>
 {% endblock %}

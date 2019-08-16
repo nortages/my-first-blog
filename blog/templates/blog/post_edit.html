@@ -1,18 +1,23 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div class="forms">
-    <h1>New post</h1>
-    <form method="POST">{% csrf_token %}
-    	<div>
-    	    {{ form.title.label_tag }}
-	        {{ form.title }}
-    	</div>
-        <div>
-    	    {{ form.text.label_tag }}
-	        {{ form.text }}
-        </div>
-        <button type="submit" class="save btn btn-dark"><i class="fas fa-save"></i>Save</button>
-    </form>
+<div class="row no-gutters">
+<form class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" method="post">
+    {% csrf_token %}
+    <h2 class="mb-2">{{ action }} post</h2>
+
+    <div class="form-label-group ">
+        {{ form.title }}
+        <label for="inputTitle" class="">Title</label>
+    </div>
+
+    <div class="form-label-group ">
+        {{ form.text }}
+        <label for="inputText" class="">Text</label>
+    </div>
+
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn btn-primary"><i class="fas fa-pen-square"></i>{{ action }}</button>
+</form>
 </div>
 {% endblock %}

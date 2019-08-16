@@ -87,12 +87,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'blogdb',
-        # 'USER': 'sega',
-        # 'PASSWORD': 'impulse123',
-        # 'HOST': 'localhost',
-        # 'PORT': '',
     }
 }
 
@@ -140,10 +134,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'segatron99@gmail.com'
+EMAIL_HOST_PASSWORD = 'hscsosuhlbl'
+EMAIL_PORT = 587
 
 #Authentication backends
 AUTHENTICATION_BACKENDS = (
-    # 'userena.backends.UserenaAuthenticationBackend',
-    # 'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
