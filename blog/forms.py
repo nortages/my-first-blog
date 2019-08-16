@@ -24,7 +24,7 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2',)
-        
+
     def __init__(self, *args, **kargs):
         super().__init__(*args, **kargs)
         self.fields['username'].widget.attrs.update({'maxlength':"25", 'autofocus': True, 'class': 'form-control', 'placeholder':'Username', 'id':'inputUsername'})
@@ -43,3 +43,9 @@ class Login_form(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+    def __init__(self, *args, **kargs):
+        super().__init__(*args, **kargs)
+        self.fields['username'].widget.attrs.update({'maxlength':"25", 'autofocus': True, 'class': 'form-control', 'placeholder':'Username', 'id':'inputUsername'})
+        self.fields['password'].widget.attrs.update({'class':'form-control', 'placeholder':'Password', 'id':'inputPassword'})
+

@@ -20,9 +20,9 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import static
 from django.views.generic import RedirectView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(next_page='login'), name='logout'),
     path('', include('blog.urls')),
 ]

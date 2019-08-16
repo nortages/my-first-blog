@@ -5,8 +5,19 @@ from django.contrib.staticfiles.urls import static
 
 from . import views
 
+
+from django.contrib.auth.views import LoginView
+
+from .forms import Login_form
+
+
+class CustomLoginView(LoginView):
+    authentication_form = Login_form
+
+
 urlpatterns = [
     path('', views.post_list, name='post_list'),
+    path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
     path('post/new/', views.post_new, name='post_new'),
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
