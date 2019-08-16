@@ -3,15 +3,20 @@
 
 {% block content %}
 <div class="row no-gutters">
-<form class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" enctype="multipart/form-data" method="post" action="{% url 'register' %}" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : "")'>
+<form class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" enctype="multipart/form-data" method="post" action="{% url 'register' %}" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : ""); password1.setCustomValidity(password1.value.length < 8 ? "Password must be at least 7 characters." : "");'>
 	{% csrf_token %}
+
     <h2>Registration form</h2>
 
 	<div class="form-label-group">
 		{{ user_form.username }}
 		<label for="inputUsername">Username</label>
-		{% if errors.user_form %}
-			<p class="errors">A user with that username already exists</p>
+		{% if errors.user_form|get:'username' %}
+			<div class="errors ml-1">
+				{% for error in errors.user_form.username %}
+					<p>{{ error }}</p>
+				{% endfor %}
+			</div>
 		{% endif %}
 	</div>
 
@@ -23,13 +28,22 @@
 	<div class="form-label-group">
 		{{ user_form.password2 }}
 		<label for="inputPassword2">Password confirmation</label>
+		{% if errors.user_form|get:'password2' %}
+			<div class="errors ml-1">
+				{% for error in errors.user_form.password2 %}
+					<p>{{ error }}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
 	</div>
 
 	<div class="form-label-group">
 		{{ profile_form.email }}
 		<label for="inputEmail">Email</label>
-		{% if errors.profile_form %}
-			<p class="errors">A user with that email already exists</p>
+		{% if errors.profile_form|get:'email' %}
+			<div class="errors ml-1">
+				<p>A user with that email already exists.</p>
+			</div>
 		{% endif %}
 	</div>
 

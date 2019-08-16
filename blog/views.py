@@ -13,6 +13,15 @@ from .models import Post, Comment, Profile
 from .forms import PostForm, CommentForm, UserForm, ProfileForm, Login_form
 
 
+# from django.contrib.auth.views import LoginView
+
+# from .forms import UserForm
+
+
+# class CustomLoginView(LoginView):
+#     authentication_form = UserForm
+
+
 def only_creator(view, pk, staff):
     def wrapper(request, *args, **kwargs):
         if request.user == staff.author:
@@ -98,9 +107,9 @@ def comment_remove(request, pk):
     return redirect('post_detail', pk=comment.post.pk)
 
 def register(request):
-    errors = {'user_form': '', 'profile_form': ''}
+    errors = {'user_form': {}, 'profile_form': {}}
     if request.method == 'POST':
-        user_form = UserCreationForm(data=request.POST)
+        user_form = UserForm(data=request.POST)
         profile_form = ProfileForm(data=request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
@@ -122,7 +131,7 @@ def register(request):
             print(user_form.errors, profile_form.errors)
             errors = {'user_form': user_form.errors, 'profile_form': profile_form.errors}
     else:
-        user_form = UserCreationForm()
+        user_form = UserForm()
         profile_form = ProfileForm()
     return render(request,'registration/registration.html',
                           {'user_form': user_form,

@@ -1,6 +1,4 @@
 from datetime import datetime
-# from bs4 import BeautifulSoup
-
 from django import template
 
 register = template.Library()
@@ -17,7 +15,6 @@ def is_today(dt):
 def is_thisYear(dt):
   return dt.year == datetime.now().year
 
-# @register.filter
-# def get_error(html_doc):
-# 	soup = BeautifulSoup(html_doc, 'html.parser')
-# 	return soup.ul.li.ul.li.string
+@register.filter
+def get(dict_obj, name):
+	return dict_obj.get(name)
