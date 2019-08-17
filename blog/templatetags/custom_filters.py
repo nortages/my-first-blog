@@ -18,3 +18,9 @@ def is_thisYear(dt):
 @register.filter
 def get(dict_obj, name):
 	return dict_obj.get(name)
+
+@register.filter
+def get_next(path):
+	if path == "/" or path == "/accounts/register/" or path == "/accounts/login/":
+		return '/'
+	return path

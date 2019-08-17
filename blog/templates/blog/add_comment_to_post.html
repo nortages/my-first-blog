@@ -1,4 +1,12 @@
 {% extends 'blog/base.html' %}
+{% load static %}
+
+{% block extra_head_tags %}
+    <title>Add comment</title>
+	<meta name="robots" content="noindex">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/floating-labels.css' %}"/>
+{% endblock %}
 
 {% block content %}
 <div class="row no-gutters">

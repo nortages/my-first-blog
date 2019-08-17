@@ -1,19 +1,15 @@
 from django.urls import path
 from django.conf import settings
-# from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView
 from django.contrib.staticfiles.urls import static
 
 from . import views
-
-
-from django.contrib.auth.views import LoginView
-
 from .forms import Login_form
 
 
 class CustomLoginView(LoginView):
     authentication_form = Login_form
-
+    
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
@@ -25,12 +21,10 @@ urlpatterns = [
     path('post/<int:pk>/add_comment/', views.add_comment_to_post, name='add_comment_to_post'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
     path('accounts/register/', views.register, name='register'),
-    path('accounts/login/', views.login, name='login'),
     path('profile/<str:username>/', views.profile, name='profile'),
     path('profile/', views.profile, name='profile'),
     path('profile/edit/<str:username>', views.profile_edit, name='profile_edit'),
     path('profile/edit/', views.profile_edit, name='profile_edit'),
 ]
 
-# urlpatterns += staticfiles_urlpatterns()
 

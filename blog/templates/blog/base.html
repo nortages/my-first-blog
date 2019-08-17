@@ -1,58 +1,169 @@
 {% load static %}
+{% load custom_filters %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Nortages' blog</title>
-
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
 
     <link rel= "preconnect" href="https://fonts.googleapis.com" />
-    <link rel= "preconnect" href="//maxcdn.bootstrapcdn.com" />
+    <link rel= "preconnect" href="https://maxcdn.bootstrapcdn.com" />
 
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Baloo|Open+Sans&display=swap" as="style" />
-    <link rel="preload" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" as="style"/>
+    <link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" as="style"/>
 
 	<link href="https://fonts.googleapis.com/css?family=Baloo|Open+Sans&display=swap" rel="stylesheet" type="text/css"/>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"/>
+    <link href="{% static 'fontawesome-free-5.10.1-web/css/all.min.css' %}" rel="stylesheet">
+    {% block extra_head_tags %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
     <link rel="stylesheet" href="{% static 'css/floating-labels.css' %}"/>
-	<link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
+    
+    <style type="text/css">
+        html, body, .container-fluid {
+            height: 100%;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            color: #000;
+        }
 
+        .title {
+            font-size: 2.5rem;
+            font-family: 'Baloo', cursive;
+            margin-bottom: 0;
+        }
 
-    <link  href="{% static 'node_modules/cropperjs/dist/cropper.css' %}" rel="stylesheet">
-    <script src="{% static 'node_modules/cropperjs/dist/cropper.js' %}"></script>
+        nav {
+            background-color: #000;
+        }
 
-    <link href="{% static 'fontawesome-free-5.10.1-web/css/all.css' %}" rel="stylesheet">
+        a i {
+            margin-right: 0.3rem;
+        }
 
+        #loginForm + .dropdown-menu {
+            background-color: black;
+            min-width: 15rem;
+        }
+
+        #userOptions + .dropdown-menu {
+            background-color: black;
+        }
+
+        #userOptions + .dropdown-menu .dropdown-item {
+            color: white;
+            font-size: 1.3rem;
+            padding-top: 0;
+            padding-bottom: 0; 
+        }
+
+        #userOptions + .dropdown-menu .dropdown-item:hover {
+            background-color: black;
+            color: rgba(255,255,255,.5);
+        }
+
+        nav .title a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            font-size: 1.5rem;
+        }
+
+        .ellipses {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .date {
+            color: #828282;
+        }
+
+        .post .title, .post .title:visited {
+            color: #000;
+        }
+
+        .profile_info .title {
+            font-size: 2.2rem;
+        }
+    </style>
 
 </head>
+
 <body class="bg-secondary">
-    <div class="container-fluid">
-    	<header class="row no-gutters p-2 sticky-top">
-            <div class="col-lg-6 text-center">
-                <h1 class="title"><a href="/">Nortages' blog</a></h1>
+    
+        <!-- row no-gutters p-2  -->
+    	<nav class="navbar navbar-expand-lg navbar-dark">
+            <!-- col-lg-6 text-center -->
+            <div class="navbar-brand ml-lg-5">
+                <h1 class="title "><a aria-label="Go to the main page" href="/">Nortages' blog</a></h1>
             </div>
-            <div class="col-lg-6 top-menu text-center mt-n2 mt-lg-0 d-flex justify-content-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- col-lg-6 top-menu text-center mt-n2 mt-lg-0 d-flex justify-content-center -->
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
-                    <div class="ellipses">
-                        <a href="{% url 'profile' username=user.username %}">{{ user.username }}</a>
-                    </div>
-                    <a class="" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
-                    <a class="" href="{% url 'post_new' %}"><i class="fas fa-pen-square"></i></a>
-                {% else %}
-                    <span>Please login</span>
-                    {% if request.path == "/" or request.path == "/accounts/register/" or request.path == "/accounts/login/" %}
-                        <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
-                    {% else %}
-                        <a href="{% url 'login' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i></a>
-                    {% endif %}
-                    <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i></a>
+                    
                 {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    {% if not user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown" id="loginForm" href="#" aria-label="Login to the account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+                            <div class="dropdown-menu dropdown-menu-right px-lg-2" aria-labelledby="loginForm">
+                                <form method="post" accept-charset="UTF-8" action="{% url 'login' %}">
+                                    {% csrf_token %}
+
+                                    {% if form.errors %}
+                                        <p class="errors mb-2 ml-1">
+                                            Your username and password didn't match. Please try again.
+                                        </p>
+                                    {% endif %}
+                                    
+                                    <div class="form-label-group">
+                                        {% if form %}
+                                            {{ form.username }}
+                                        {% else %}
+                                            <input type="username" name="username" maxlength="25" autofocus class= form-control placeholder='Username' id='inputUsername'>
+                                        {% endif %}
+                                        <label for="inputUsername" class="">Username</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        {% if form %}
+                                            {{ form.password }}
+                                        {% else %}
+                                            <input type="password" name="password" class=form-control placeholder='Password' id='inputPassword'>
+                                        {% endif %}
+                                        <label for="inputPassword" class="">Password</label>
+                                    </div>
+                                    <input type="hidden" name="next" value="{{ request.path|get_next }}">
+                                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-sign-in-alt"></i>Login</button>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="register" href="{% url 'register' %}" aria-label="Create a new user">Register</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown" id="userOptions" href="#" aria-label="Open the your profile page" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'profile' username=user.username %}"><div class="ellipses"><i class="fas fa-user"></i>{{ user.username }}</div></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userOptions">
+                                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-label="Log out from the account" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% endif %}
             </div>
-        </header>
-        
+        </nav>
+    <div class="container-fluid">
         <div class="row content no-gutters justify-content-center">
             <div class="col-lg-10">
                 {% block content %}

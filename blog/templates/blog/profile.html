@@ -1,19 +1,24 @@
 {% extends 'blog/base.html' %}
 
+{% block extra_head_tags %}
+    <meta name="Description" content="Username: {{ profile.user.username }}">
+    <title>{{ profile.user.username }}</title>
+{% endblock %}
+
 {% block content %}
     <div class="row no-gutters profile_block bg-white p-3 rounded-bottom shadow">
-        <div class="col-3">
-            <img class="avatar rounded img-fluid w-100" src="{{ profile.avatar.url }}">
+        <div class="col-4 col-md-3">
+            <img class="avatar rounded img-fluid w-100" src="{{ profile.avatar.url }}" alt="User avatar">
         </div>
-        <div class="col-9 profile_info pl-3">
+        <div class="col-8 col-md-9 profile_info pl-3">
             <div class="d-flex flex-row">
                 <h1 class="title ellipses">{{ profile.user.username }}</h1>
                 {% if user.is_superuser or profile.user == user %}
                     <!-- <a class="ml-2" href="{% url 'profile_edit' username=profile.user.username %}"><i class="fas fa-edit"></i></a> -->
                 {% endif %}
             </div>
-            <p>Posts: {{ posts.count }}</p>
-            <p>Comments: {{ profile.user.comments.count }}</p>
+            <div>Posts: {{ posts.count }}</div>
+            <div>Comments: {{ profile.user.comments.count }}</div>
         </div>
     </div>
     {% include "blog/posts.html" %}

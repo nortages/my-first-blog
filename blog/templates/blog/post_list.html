@@ -1,5 +1,10 @@
 {% extends 'blog/base.html' %}
 
+{% block extra_head_tags %}
+    <meta name="Description" content="Main page">
+    <title>Nortages' blog</title>
+{% endblock %}
+
 {% block content %}
     {% include "blog/posts.html" %}
 {% endblock %}

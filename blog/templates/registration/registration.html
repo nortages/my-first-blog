@@ -1,16 +1,26 @@
 {% extends "blog/base.html" %}
 {% load custom_filters %}
+{% load static %}
+
+{% block extra_head_tags %}
+    <title>Registration</title>
+    <meta name="Description" content="Registration page">
+	<link href="{% static 'node_modules/cropperjs/dist/cropper.css' %}" rel="stylesheet" media="nope!" onload="this.media='all'">
+    <script src="{% static 'node_modules/cropperjs/dist/cropper.js' %}" async></script>
+    <link rel="stylesheet" href="{% static 'css/floating-labels.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="row no-gutters">
-<form class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" enctype="multipart/form-data" method="post" action="{% url 'register' %}" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : ""); password1.setCustomValidity(password1.value.length < 8 ? "Password must be at least 7 characters." : "");'>
+<form  autocomplete="off" class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="{% url 'register' %}" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : ""); password1.setCustomValidity(password1.value.length < 8 ? "Password must be at least 7 characters." : "");'>
 	{% csrf_token %}
 
     <h2>Registration form</h2>
 
 	<div class="form-label-group">
 		{{ user_form.username }}
-		<label for="inputUsername">Username</label>
+		<label for="inputUsernameRegister">Username</label>
 		{% if errors.user_form|get:'username' %}
 			<div class="errors ml-1">
 				{% for error in errors.user_form.username %}
@@ -50,7 +60,7 @@
 	<div class="form-group">
 		<label class="label" data-toggle="tooltip" title="Change your avatar">
         	<img class="rounded" id="avatar" src="/media/avatars/default.png" height="150" width="150" alt="avatar">
-        	<input type="file" name="avatar" id="inputFile" class="sr-only" multiple>
+        	<input type="file" name="avatar" id="inputFile" accept="image/*" class="sr-only">
 		</label>
 
 		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -82,15 +92,15 @@
 </form>
 </div>
 
-
-
-<script>
+<script async>
   window.addEventListener('DOMContentLoaded', function () {
 	var avatar = document.getElementById('avatar');
 	var image = document.getElementById('image');
 	var inputFile = document.getElementById('inputFile');
 	var $modal = $('#modal');
 	var cropper;
+
+	$('#register').addClass("active");
 
 	$('[data-toggle="tooltip"]').tooltip();
 

@@ -1,0 +1,17 @@
+
+.post #text, .post .title, .comment {
+    overflow-wrap: break-word;    
+}
+
+.comment .comment_header > a, .post_options {
+    color: #000;
+}
+
+.comment .comment_header > a:hover {
+    color: red;
+}
+
+.comment p {
+  margin-bottom: 0;
+}
+

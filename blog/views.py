@@ -7,19 +7,9 @@ from django.contrib.auth.models import Group, User
 from django.contrib.auth import login, logout, authenticate
 from django.views.decorators.cache import never_cache
 from django.utils import timezone
-# from django.views.defaults import permission_denied
 
 from .models import Post, Comment, Profile
 from .forms import PostForm, CommentForm, UserForm, ProfileForm, Login_form
-
-
-# from django.contrib.auth.views import LoginView
-
-# from .forms import UserForm
-
-
-# class CustomLoginView(LoginView):
-#     authentication_form = UserForm
 
 
 def only_creator(view, pk, staff):
@@ -28,7 +18,6 @@ def only_creator(view, pk, staff):
             return HttpResponseRedirect(url)
         return view(request, *args, **kwargs)
     return wrapper
-
 
 def post_list(request):
     posts = Post.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')

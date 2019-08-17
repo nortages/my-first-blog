@@ -1,7 +1,14 @@
 {% extends 'blog/base.html' %}
+{% load static %}
+
+{% block extra_head_tags %}
+    <meta name="Description" content="Date: {{post.created_date}} Title: {{ post.title }}">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
+{% endblock %}
 
 {% block content %}
-    <div class="post p-3 rounded-bottom bg-white shadow">
+    <article class="post p-3 rounded-bottom bg-white shadow">
         <span class="date float-left">{{ post.created_date }}</span>
         <div class=" d-flex flex-row">
             <a class="ml-2 ellipses" href="{% url 'profile' username=post.author.username %}">{{ post.author.username }}</a>
@@ -10,27 +17,24 @@
                 <a class="ml-2 post_options" href="{% url 'post_remove' pk=post.pk %}"><i class="fas fa-trash"></i></a>
             {% endif %}
         </div>
-        
         <h1 class='title mt-2'>{{ post.title }}</h1>
         <p id="text">{{ post.text|linebreaksbr }}</p>
-        <a class="btn btn-primary mt-3" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
-    </div>
+        <a class="btn btn-primary " href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+    </article>
 
     <div id="comments">
         {% for comment in comments %}
             <div class="comment bg-white p-3 my-lg-4 rounded border-top shadow">
                 <div class="comment_header d-flex justify-content-between">
                     <div class="comment_info ellipses">
-                        <p class="date">{{ comment.created_date }}</p>
+                        <div class="date">{{ comment.created_date }}</div>
                         <strong><a href="{% url 'profile' username=comment.author.username %}">{{ comment.author.username }}</a></strong>
                     </div>
                     {% if user.is_superuser or comment.author == user %}
                         <a class="" href="{% url 'comment_remove' pk=comment.pk %}"><i class="fas fa-trash"></i></a>
                     {% endif %}
                 </div>
-                <div class="mt-1">
-                    {{ comment.text|linebreaks }}
-                </div>
+                {{ comment.text|linebreaks }}
             </div>
         {% endfor %}
     </div>

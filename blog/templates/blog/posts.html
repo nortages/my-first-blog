@@ -3,9 +3,9 @@
 <div class="posts mt-lg-5">
     {% for post in posts %}
         <div class="post bg-white mb-lg-4 p-3 rounded border-top shadow">
-            <h1 class="title ellipses">
-                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-            </h1>
+            
+            <a class="title" href="{% url 'post_detail' pk=post.pk %}"><div class="ellipses">{{ post.title }}</div></a>
+            
             <div class="date ellipses">
                 {% if post.created_date|is_thisYear %}
                     {% if post.created_date|is_today %}

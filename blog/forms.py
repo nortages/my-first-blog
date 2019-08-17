@@ -27,7 +27,7 @@ class UserForm(UserCreationForm):
 
     def __init__(self, *args, **kargs):
         super().__init__(*args, **kargs)
-        self.fields['username'].widget.attrs.update({'maxlength':"25", 'autofocus': True, 'class': 'form-control', 'placeholder':'Username', 'id':'inputUsername'})
+        self.fields['username'].widget.attrs.update({'maxlength':"25", 'autofocus': True, 'class': 'form-control', 'placeholder':'Username', 'id':'inputUsernameRegister'})
         self.fields['password1'].widget.attrs.update({'class':'form-control', 'placeholder':'Password', 'id':'inputPassword1'})
         self.fields['password2'].widget.attrs.update({'class':'form-control', 'placeholder':'Password confirmation', 'id':'inputPassword2'})
 
