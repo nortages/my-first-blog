@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="row no-gutters">
-<form  autocomplete="off" class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="{% url 'register' %}" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : ""); password1.setCustomValidity(password1.value.length < 8 ? "Password must be at least 7 characters." : "");'>
+<form autocomplete="off" class="col-md-7 mx-md-auto p-3 rounded-bottom bg-white shadow" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="{% url 'register' %}" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : ""); password1.setCustomValidity(password1.value.length < 8 ? "Password must be at least 7 characters." : "");'>
 	{% csrf_token %}
 
     <h2>Registration form</h2>
