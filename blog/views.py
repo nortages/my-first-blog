@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group, User
 from django.contrib.auth import login, logout, authenticate
 from django.views.decorators.cache import never_cache
 from django.utils import timezone
+from django.http import Http404, JsonResponse
 
 from .models import Post, Comment, Profile
 from .forms import PostForm, CommentForm, UserForm, ProfileForm, Login_form
@@ -41,7 +42,7 @@ def post_new(request):
         form = PostForm()
 
     return render(request, 'blog/post_edit.html', {'form': form, 'action': 'Create'})
-    
+
 @login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -57,7 +58,7 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form, 'action': 'Edit'})
-    
+
 @login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -69,23 +70,19 @@ def post_remove(request, pk):
 @login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
+    if request.method == "POST" and request.is_ajax():
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
             comment.author = request.user
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            from django.template.loader import render_to_string
+            rendered = render_to_string('blog/comment.html', {'comment': comment, 'user': request.user})
+            response = {'html':rendered}
+            return JsonResponse(response)
     else:
-        form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
-
-@login_required
-def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.approve()
-    return redirect('post_detail', pk=comment.post.pk)
+        raise Http404
 
 @login_required
 def comment_remove(request, pk):
@@ -109,7 +106,7 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            
+
             if 'avatar' in request.FILES:
                 profile.avatar = request.FILES['avatar']
                 ext = profile.avatar.name.split('.')[1]
@@ -153,3 +150,16 @@ def profile_edit(request, username=None):
         user_form = UserForm(instance=user)
         profile_form = ProfileForm(instance=profile)
     return render(request, 'blog/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+    from django.http import Http404, JsonResponse
+
+
+from django.http import Http404, JsonResponse
+
+def add_ajax(request):
+    if request.is_ajax():
+        response = {'first-text': 'Lorem Ipsum is simply dummy text', 'second-text': 'to make a type specimen book. It has '}
+
+        return JsonResponse(response)
+    else:
+        raise Http404

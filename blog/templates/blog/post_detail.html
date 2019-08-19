@@ -19,7 +19,36 @@
         </div>
         <h1 class='title mt-2'>{{ post.title }}</h1>
         <p id="text">{{ post.text|linebreaksbr }}</p>
-        <a class="btn btn-primary " href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+        <!--  href="{% url 'add_comment_to_post' pk=post.pk %}" -->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add comment</button>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Add comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body p-0">
+                <div class="form-label-group mb-0">
+                  <form id="add_comment_form">
+                    {% csrf_token %}
+                    <textarea type="text" rows='6' name="text" autofocus class='form-control rounded-0' placeholder='Comment text' id='inputComment'></textarea>
+                    <label for="inputComment">Comment text</label>
+                  </form>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="close_form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="add_comment_btn">Add</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
     </article>
 
     <div id="comments">
@@ -38,4 +67,30 @@
             </div>
         {% endfor %}
     </div>
+
+<!-- <script src="http://www.yourwebsite.com/history.js/scripts/bundled/html4+html5/jquery.history.js"></script> -->
+
+<script>
+    $(document).ready(function () {
+      $('#add_comment_btn').click(function () {
+        $('#add_comment_form').submit();
+      });
+
+      $('#add_comment_form').on('submit', function () {
+        $.ajax({
+          url: "{% url 'add_comment_to_post' pk=post.pk %}",
+          type: "POST",
+          data: $('#add_comment_form').serialize(),
+          success: function(data) {
+            $('#comments').prepend(data['html']);
+            $('#close_form').click();
+
+            var stateObj = { foo: "bar" };
+            history.replaceState(stateObj, "page 3");
+          },
+        });
+        return false;
+      });
+    });
+</script>
 {% endblock %}

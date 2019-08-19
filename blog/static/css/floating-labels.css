@@ -14,7 +14,8 @@
   padding: var(--input-padding-y) var(--input-padding-x);
 }
 
-.form-label-group > label {
+.form-label-group > label,
+.form-label-group > textarea {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,7 +41,7 @@
   padding-bottom: calc(var(--input-padding-y) / 3);
 }
 
-.form-label-group textarea:not(:placeholder-shown) ~ label, 
+.form-label-group textarea:not(:placeholder-shown) ~ label,
 .form-label-group input:not(:placeholder-shown) ~ label,
 .form-label-group input:-webkit-autofill ~ label {
   padding-top: calc(var(--input-padding-y) / 3);

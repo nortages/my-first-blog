@@ -1,0 +1,12 @@
+<div class="comment bg-white p-3 my-lg-4 rounded border-top shadow">
+    <div class="comment_header d-flex justify-content-between">
+        <div class="comment_info ellipses">
+            <div class="date">{{ comment.created_date }}</div>
+            <strong><a href="{% url 'profile' username=comment.author.username %}">{{ comment.author.username }}</a></strong>
+        </div>
+        {% if user.is_superuser or comment.author == user %}
+            <a class="" href="{% url 'comment_remove' pk=comment.pk %}"><i class="fas fa-trash"></i></a>
+        {% endif %}
+    </div>
+    {{ comment.text|linebreaks }}
+</div>

@@ -27,9 +27,9 @@ class UserForm(UserCreationForm):
 
     def __init__(self, *args, **kargs):
         super().__init__(*args, **kargs)
-        self.fields['username'].widget.attrs.update({'autocomplete':"new-username", 'maxlength':"25", 'autofocus': True, 'class': 'form-control', 'placeholder':'Username', 'id':'inputUsernameRegister'})
-        self.fields['password1'].widget.attrs.update({'autocomplete':"new-password1", 'class':'form-control', 'placeholder':'Password', 'id':'inputPassword1'})
-        self.fields['password2'].widget.attrs.update({'autocomplete':"new-password2", 'class':'form-control', 'placeholder':'Password confirmation', 'id':'inputPassword2'})
+        self.fields['username'].widget.attrs.update({'autocomplete':"new-username", 'maxlength':"25", 'autofocus': True, 'class': 'form-control', 'placeholder':'Your username', 'id':'inputUsernameRegister'})
+        self.fields['password1'].widget.attrs.update({'autocomplete':"new-password1", 'class':'form-control', 'placeholder':'Your password', 'id':'inputPassword1'})
+        self.fields['password2'].widget.attrs.update({'autocomplete':"new-password2", 'class':'form-control', 'placeholder':'Repeat password', 'id':'inputPassword2'})
 
 
 class ProfileForm(forms.ModelForm):

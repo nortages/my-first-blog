@@ -20,7 +20,7 @@
 
 	<div class="form-label-group">
 		{{ user_form.username }}
-		<label for="inputUsernameRegister">Username</label>
+		<label for="inputUsernameRegister">Your username</label>
 		{% if errors.user_form|get:'username' %}
 			<div class="errors ml-1">
 				{% for error in errors.user_form.username %}
@@ -32,12 +32,12 @@
 
 	<div class="form-label-group">
 		{{ user_form.password1 }}
-		<label for="inputPassword1">Password</label>
+		<label for="inputPassword1">Your password</label>
 	</div>
 
 	<div class="form-label-group">
 		{{ user_form.password2 }}
-		<label for="inputPassword2">Password confirmation</label>
+		<label for="inputPassword2">Repeat password</label>
 		{% if errors.user_form|get:'password2' %}
 			<div class="errors ml-1">
 				{% for error in errors.user_form.password2 %}
@@ -49,7 +49,7 @@
 
 	<div class="form-label-group">
 		{{ profile_form.email }}
-		<label for="inputEmail">Email</label>
+		<label for="inputEmail">Your email</label>
 		{% if errors.profile_form|get:'email' %}
 			<div class="errors ml-1">
 				<p>A user with that email already exists.</p>
